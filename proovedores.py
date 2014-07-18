@@ -14,19 +14,20 @@ class Proovedor:
         con.commit()
         return True
 
-    def actualizar(self):
-        cur.execute("UPDATE PROOVEDORES SET RFC='%s',NOMBRE='%s',EMAIL='%s',DIRECCION='%s',TELEFONO='%s' WHERE RFC = '%s'" % (self.rfc,self.nombre,self.domicilio,self.telefono,self.email,self.rfc))
+    def actualizar(self,nombre,email,direccion,telefono):
+        cur.execute("UPDATE PROOVEDORES SET RFC='%s',NOMBRE='%s',EMAIL='%s',DIRECCION='%s',TELEFONO='%s' WHERE RFC = '%s'" % (self.rfc,nombre,email,direccion,telefono,self.rfc))
         con.commit()
         return True
 
-    def eliminar(self,rfc):
+    def eliminar(self):
         cur.execute("DELETE FROM PROOVEDORES WHERE RFC = '%s'" % self.rfc)
+        con.commit()
         return True
 
     def consultar_p(self):
-        cur.execute("SELECT * FROM PROOVEDORES WHERE RFC = '%s'" % self.rfc)
+        cur.execute("SELECT RFC,NOMBRE,EMAIL,DIRECCION,TELEFONO FROM PROOVEDORES WHERE RFC = '%s'" % self.rfc)
         return cur
 
     def mostrarTodos(self):
-        cur.execute("SELECT * FROM PROOVEDORES ORDER BY NOMBRE")
+        cur.execute("SELECT RFC,NOMBRE,EMAIL,DIRECCION,TELEFONO FROM PROOVEDORES ORDER BY ID")
         return cur
