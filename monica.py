@@ -90,15 +90,10 @@ class main(QWidget):
 
         self.tbl_datos = QTableView(self)
         self.tbl_datos.move(120,100)
-        self.tbl_datos.setMinimumSize(900,500)
-        self.tbl_datos.setMaximumSize(900,500)
-
+        self.tbl_datos.setMinimumSize(850,500)
+        self.tbl_datos.setMaximumSize(850,500)
 
         self.tbl_datos.resizeColumnsToContents()
-
-        #self.layout = QVBoxLayout(self)
-        #self.layout.addWidget(self.tbl_datos)
-        #self.setLayout(self.layout)
 
     def ingresarD(self): #Muestra Campos de Datos
         self.lbl_rfc.show()
@@ -225,28 +220,22 @@ class main(QWidget):
             print u[0]
             self.lne_nombre.setText(u[1])
             print u[1]
-            self.lne_direccion.setText(u[2])
-            self.lne_telefono.setText(u[3])
-            self.lne_email.setText(u[4])
+            self.lne_email.setText(u[2])
+            self.lne_direccion.setText(u[3])
+            self.lne_telefono.setText(u[4])
             self.actualizar()
 
     def actualizar(self):
+        p = Proovedor(self.lne_buscar.text())
         p.actualizar(self.lne_nombre.text(),self.lne_email.text(),self.lne_direccion.text(),self.lne_telefono.text())
         print "datos actualizados"
-
-
-
-
-
-
-
         p.actualizar(self.lne_nombre.text(),self.lne_email.text(),self.lne_direccion.text(),self.lne_telefono.text())
+        self.buscar()
 
 
     def run(self):
         self.show()
         app.exec_()
-
 
 class MyTableModel(QAbstractTableModel):
     def __init__(self,parent,datos,header,*args):
@@ -281,12 +270,5 @@ class MyTableModel(QAbstractTableModel):
 
 header = [' RFC ', ' Nombre ', ' e-mail ', u' Dirección ',u' Teléfono ']
 # use numbers for numeric data to sort properly
-
-
-datos = [
-('',"","","",""),
-
-]
-
 app_main = main()
 app_main.run()
